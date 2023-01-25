@@ -1,22 +1,21 @@
 <template>
+
     <video autoplay loop muted plays-inline class="back-video">
         <source src="../assets/videos/index.mp4" type="video/mp4" />
     </video>
+
     <div class="center-button">
         <button class="button" @click="credentials()">Login</button>
         <transition-group appear @before-enter="beforeEnter" @enter="enter">
-            <div class="card" v-if="clicked" style="width: 18rem;">
-                <div class="card-body shadow p-3 mb-5 bg-white rounded" style="background-color:white;">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
+            <v-card text="..." v-if="clicked">
+                <v-card-actions>
+                    <v-btn>Click me</v-btn>
+                </v-card-actions>
+            </v-card>
         </transition-group>
     </div>
-
 </template>
+
 <script setup>
 import { ref } from 'vue';
 import { gsap } from 'gsap';
