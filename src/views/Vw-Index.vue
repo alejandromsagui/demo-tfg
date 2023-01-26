@@ -1,40 +1,42 @@
 <template>
+        <div class="container" key="container">
+            <video autoplay loop muted plays-inline class="back-video">
+                <source src="../assets/videos/index.mp4" type="video/mp4" />
+            </video>
 
-    <video autoplay loop muted plays-inline class="back-video">
-        <source src="../assets/videos/index.mp4" type="video/mp4" />
-    </video>
+            <div class="center-button">
 
-    <div class="center-button">
+                <transition-group appear @before-enter="beforeEnter" @enter="enter">
+                    <button type="button" class="button" @click="corangeentials()" key="button">ACCEDER</button>
+                </transition-group>
 
-        <transition-group appear @before-enter="beforeEnter" @enter="enter">
-            <button type="button" class="button" @click="corangeentials()" key="button">ACCEDER</button>
-        </transition-group>
+            </div>
 
-    </div>
-
-    <div class="center-card">
-        <transition-group appear @before-enter="beforeLogin" @enter="enterLogin">
-            <v-card class="card" v-if="clicked" :elevation="24">
-                <v-card-title id="card-title">
-                    <span>Iniciar sesión</span>
-                </v-card-title>
-                <div class="background-card">
-                    <v-form ref="form" lazy-validation id="form">
-                    <v-responsive class="mx-auto" max-width="350">
-                        <v-text-field width="20px" label="Usuario" requiorange></v-text-field>
-                        <v-text-field type="password" label="Contraseña" requiorange></v-text-field>
-                    </v-responsive>
-                </v-form>
-                <v-btn variant="outlined" id="buttonLoggin">Entrar</v-btn>
-                </div>
-            </v-card>
-        </transition-group>
-    </div>
+            <div class="center-card">
+                <transition-group appear @before-enter="beforeLogin" @enter="enterLogin">
+                    <v-card class="card" v-if="clicked" :elevation="24">
+                        <v-card-title id="card-title">
+                            <span>Iniciar sesión</span>
+                        </v-card-title>
+                        <div class="background-card">
+                            <v-form ref="form" lazy-validation id="form">
+                                <v-responsive class="mx-auto" max-width="350">
+                                    <v-text-field width="20px" label="Usuario" requiorange></v-text-field>
+                                    <v-text-field type="password" label="Contraseña" requiorange></v-text-field>
+                                </v-responsive>
+                            </v-form>
+                                <v-btn variant="outlined" id="buttonLoggin" @click="changePage">Entrar</v-btn>
+                        </div>
+                    </v-card>
+                </transition-group>
+            </div>
+        </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { gsap } from 'gsap';
+import { ref } from 'vue';
+
 
 const clicked = ref(false);
 
@@ -68,7 +70,7 @@ const enter = (el, done) => {
 
 const beforeLogin = (el) => {
     el.style.opacity = 0;
-    el.style.transform = 'translateY(-60px)'
+    el.style.transform = 'translateY(-500px)'
 }
 
 const enterLogin = (el) => {
@@ -81,6 +83,9 @@ const enterLogin = (el) => {
             ease: 'bounce.out'
         })
     }
+}
+const changePage = () => {
+    window.location.href = "/test"
 }
 
 </script>
@@ -163,6 +168,7 @@ const enterLogin = (el) => {
 #card-title>span {
     margin-left: 15px;
 }
+
 #buttonLoggin {
     background-color: orange;
     display: flex;
@@ -170,7 +176,27 @@ const enterLogin = (el) => {
     color: white;
     font-weight: bold;
 }
+
 #form {
     margin-top: 40px;
+}
+
+/*Transición*/
+.route-enter-from {
+    opacity: 0;
+    transform: translateX(100px);
+}
+
+.route-enter-active {
+    transition: ass 0.3s ease-out;
+}
+
+.route-leave-to {
+    opacity: 0;
+    transform: translateX(-100px);
+}
+
+.route-leave-active {
+    transition: all 0.3s;
 }
 </style>
